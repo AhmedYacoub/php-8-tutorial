@@ -1,6 +1,7 @@
 # Notes
 to test your code, I recommend using PHP built-in web server
 by using the following command:
+
 `php -S localhost:8000`
 
 this command will serve `index.php` file.
