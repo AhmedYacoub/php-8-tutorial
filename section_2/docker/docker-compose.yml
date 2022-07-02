@@ -6,7 +6,7 @@ services:
       context: ./
       dockerfile: Dockerfile
     container_name: PHP8-OOP-App
-    restart: always
+    # restart: always
     working_dir: /var/www/
     volumes: 
       - ../src:/var/www

@@ -1,5 +1,9 @@
 <?php
 
+namespace App;
+
+use App\PaymentProfile;
+
 class Customer
 {
     private ?PaymentProfile $paymentProfile = null;

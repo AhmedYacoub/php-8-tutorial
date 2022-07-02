@@ -1,6 +1,10 @@
 <?php
-
 declare(strict_types=1);
+
+namespace App;
+
+use App\Customer;
+use App\Enums\Status;
 
 class Transaction
 {
@@ -10,7 +14,7 @@ class Transaction
     // 3. property name
     */
     private ?Customer $customer = null;
-    
+        
     /* Constructor Property Promotion */
     // defines class properties (will be initialized) 
     // as constructor parameters

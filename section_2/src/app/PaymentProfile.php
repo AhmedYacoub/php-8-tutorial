@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 class PaymentProfile
 {
     private int $id;
