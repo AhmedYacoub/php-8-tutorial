@@ -191,17 +191,184 @@ require __DIR__ . DIRECTORY_SEPARATOR . '../vendor/autoload.php';
 
 
 ##############################################################################
-#    Lesson 11 - Interfaces & Polymorphism    
+#    Lesson 11 - Interfaces & Polymorphism
 ##############################################################################
-use App\Agencies\DebtCollectorService;
-use App\Agencies\CollectionAgency;
-use App\Agencies\Rocky;
+// use App\Agencies\Rocky;
+// use App\Agencies\CollectionAgency;
+// use App\Agencies\DebtCollectorService;
 
-$service = new DebtCollectorService;
+// $service = new DebtCollectorService;
 
-/* 
-    Polymorphism: passing objects of classes that implements
-    an interface no matter of what each class implementation.
+// /*
+//     Polymorphism: passing objects of classes that implements
+//     an interface no matter of what each class implementation.
+// */
+// echo $service->collectDebt(new CollectionAgency);
+// echo $service->collectDebt(new Rocky);
+
+############################################################
+
+
+/**********************************************************/
+/*              Lesson 12 - PHP Magic Methods             */
+/**********************************************************/
+
+/*
+    __construct()
+    __destruct()
+    __call()
+    __callStatic()
+    __get()
+    __set()
+    __isset()
+    __unset()
+    __sleep()
+    __wakeup()
+    __serialize()
+    __unserialize()
+    __toString()
+    __invoke()
+    __set_state()
+    __clone()
+    __debugInfo()
+
 */
-echo $service->collectDebt(new CollectionAgency);
-echo $service->collectDebt(new Rocky);
+
+ use App\Invoice;
+
+/*
+    __get(), __set(), __isset(), __unset()
+    Pros: Dynamically create properties or override existing private/protected properties.
+    Cons: Breaks encapsulation and it does not work with statics.
+*/
+
+// $invoice object does not have any defined properties
+
+ $invoice = new Invoice;
+
+// using __set() magic method, to dynamically create and assign
+// a value to a class property which does not exist
+// Or override properties if they have
+// private/protected access modifiers.
+
+// NOTE: this will only work on properties which not defined OR properties
+// defined and have private/protected access modifiers
+// $invoice->amount = 15;
+// $invoice->transaction_title = 'New Transaction';
+// var_dump(isset($invoice->amount));
+// unset($invoice->amount);
+
+// using __get() magic method, to dynamically create a class
+// property which does not exist.
+
+// NOTE: this will only work on properties which not defined Or properties
+// defined and have private/protected access modifiers
+// echo '<br>' . $invoice->amount . '<br>';
+
+
+// echo '<pre>';
+// var_dump($invoice);
+// echo '</pre>';
+
+
+/* __call(), __callStatic() */
+
+// Using __call() will dynamically create a method
+// which does not exist in a class.
+// echo $invoice->customFun(15, 'my custom description.');
+
+// Using __callStatic() will dynamically create a static
+// method which does not exist in a class.
+// Invoice::staticCustomFun('John', 'Jane', 'Joseph');
+
+/* Using __toString to interact with an object as a string */
+// var_dump($invoice instanceof Stringable);
+
+/* Using __invoke() to call object directly */
+// Use-case: making a class having a single responsibility (has one purpose)
+// $invoice();
+
+/* Using __debugInfo() to expose all properties of a class even private/protected ones */
+// var_dump($invoice);
+
+/*******************************************************************/
+
+
+/*******************************************************************/
+/*                  Lesson 13 - Late Static Binding                */
+/*******************************************************************/
+
+// use App\ClassA;
+// use App\ClassB;
+
+// echo ClassA::getName() . PHP_EOL;
+// echo ClassB::getName() . PHP_EOL;
+
+// var_dump(ClassA::make());
+// var_dump(ClassB::make());
+
+/*******************************************************************/
+
+
+
+/*******************************************************************/
+/*                      Lesson 14 - Traits                         */
+/*******************************************************************/
+// use App\Machines\{CoffeeMaker, LatteMaker, CappuccinoMaker, AllInOneCoffeeMaker};
+
+// $coffeeMaker = new CoffeeMaker;
+// $latteMaker = new LatteMaker;
+// $cappuccinoMaker = new CappuccinoMaker;
+// $allInOneCoffeeMaker = new AllInOneCoffeeMaker;
+
+// $coffeeMaker->makeCoffee();
+
+// $latteMaker->makeCoffee();
+// $latteMaker->makeLatte();
+
+// $cappuccinoMaker->makeCoffee();
+// $cappuccinoMaker->makeCappuccino();
+
+// $allInOneCoffeeMaker->makeCoffee();
+// $allInOneCoffeeMaker->makeOriginalLatte();  // aliasing LatteTrait::makeLatte() to makeOriginalLatte()
+// $allInOneCoffeeMaker->makeLatte();          // force AllInOneCoffeeMaker to use CappuccinoTrait::makeLatte() instead of LatteTrait::makeLatte()
+// $allInOneCoffeeMaker->makeCappuccino();
+
+/*******************************************************************/
+
+
+/*******************************************************************/
+/*                  Lesson 15 - Anonymous Classes                  */
+/*******************************************************************/
+
+/* Anonymous classes are mainly used in testing an mocking data */
+// $obj = new class(1, 2, 3) {
+//     public function __construct(public int $x, public int $y, public int $z)
+//     {
+//     }
+// };
+
+// var_dump($obj);
+
+/*******************************************************************/
+
+
+/*******************************************************************/
+/*                  Lesson 16 - Object comparison                  */
+/*******************************************************************/
+//use App\Transaction;
+//
+///* PHP uses zend-value (zval) to store variables/objects into a C data structure */
+//
+//$transaction1 = new Transaction(15.99, 'new description');
+//$transaction2 = new Transaction(15.99, 'new description');
+//
+//var_dump($transaction1 == $transaction2);
+//var_dump($transaction1 === $transaction2);
+
+/*******************************************************************/
+
+
+/*******************************************************************/
+/*                    Lesson 17 - DockBlock                        */
+/*******************************************************************/
