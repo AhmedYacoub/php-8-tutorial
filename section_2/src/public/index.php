@@ -234,7 +234,7 @@ require __DIR__ . DIRECTORY_SEPARATOR . '../vendor/autoload.php';
 
 */
 
- use App\Invoice;
+//  use App\Invoice;
 
 /*
     __get(), __set(), __isset(), __unset()
@@ -244,7 +244,7 @@ require __DIR__ . DIRECTORY_SEPARATOR . '../vendor/autoload.php';
 
 // $invoice object does not have any defined properties
 
- $invoice = new Invoice;
+//  $invoice = new Invoice;
 
 // using __set() magic method, to dynamically create and assign
 // a value to a class property which does not exist
@@ -356,12 +356,12 @@ require __DIR__ . DIRECTORY_SEPARATOR . '../vendor/autoload.php';
 /*******************************************************************/
 /*                  Lesson 16 - Object comparison                  */
 /*******************************************************************/
-//use App\Transaction;
+// use App\Transaction;
 //
 ///* PHP uses zend-value (zval) to store variables/objects into a C data structure */
-//
-//$transaction1 = new Transaction(15.99, 'new description');
-//$transaction2 = new Transaction(15.99, 'new description');
+// //
+// $transaction1 = new Transaction(15.99, 'new description');
+// $transaction2 = new Transaction(15.99, 'new description');
 //
 //var_dump($transaction1 == $transaction2);
 //var_dump($transaction1 === $transaction2);
@@ -372,3 +372,120 @@ require __DIR__ . DIRECTORY_SEPARATOR . '../vendor/autoload.php';
 /*******************************************************************/
 /*                    Lesson 17 - DockBlock                        */
 /*******************************************************************/
+
+/* Check App\Invoice class */
+
+/*******************************************************************/
+
+
+/*******************************************************************/
+/*                  Lesson 18 - Cloning Objects                    */
+/*******************************************************************/
+
+// use App\Invoice;
+
+// $invoice = new Invoice;
+
+// $invoice->id = uniqid('invoice1_');
+
+// $invoice2 = clone $invoice;
+// $invoice2->id = uniqid('invoice2_');
+
+// var_dump($invoice, $invoice2);
+
+
+
+/*******************************************************************/
+/*        Lesson 19 - Serialize and Unserialize objects            */
+/*******************************************************************/
+
+// use App\Transaction;
+
+// $transaction = new Transaction(15.99, 'new description 1');
+
+// // echo serialize($transaction) . PHP_EOL;
+
+// $serializedTransaction = serialize($transaction);
+
+// var_dump(unserialize($serializedTransaction));
+
+/*******************************************************************/
+
+
+/*******************************************************************/
+/*              Lesson 20 - Exception handling                     */
+/*******************************************************************/
+
+// use App\Models\Customer;
+// use App\Models\Invoice;
+
+// $customer = new Customer(['foo' => 'bar']);
+// $invoice = new Invoice($customer);
+
+
+
+// try {
+//     $invoice->process(15.99);
+//     $message = 'Processed successfully!' . PHP_EOL;
+// } catch (App\Exceptions\CustomException $customException) {
+//     /* Catches InvalidArgument or MissingBillingInfo exceptions */
+//     $message = $customException->getMessage() . PHP_EOL;
+// } finally {
+//     echo $message;
+// }
+
+/*******************************************************************/
+
+
+/*******************************************************************/
+/*                  Lesson 21 - DateTime Object                    */
+/*******************************************************************/
+
+/* Default timezone is UTC */
+/* 
+    Check supported timezones from the following link:
+    http://php.net/manual/en/timezones.php 
+*/
+// $now = new DateTime();
+// $tomorrow = new DateTime('tomorrow');
+// $tomorrowAt3Pm = new DateTime('tomorrow 3:00pm');
+// $tomorrowNoon = new DateTime('noon');
+// $yesterdayAt10Am = new DateTime('yesterday 10:00am');
+// $customDate = new DateTime('01-01-2022 12:49:17');
+// $nowAfricaCairo = new DateTime(timezone: new DateTimeZone('Africa/Cairo'));
+
+// var_dump($nowAfricaCairo);
+
+// Set timezone to Europe/Istanbul.
+// $now->setTimezone(new DateTimeZone('Europe/Istanbul'));
+
+// var_dump($now);
+
+// format DateTime object.
+// echo $now->format('d-m-Y h:i A') . PHP_EOL;
+
+/* create a DateTime object from stringed format. */
+// $date = '05/15/2022 01:19 PM';  // -> US format.
+
+// $dateTime = DateTime::createFromFormat(
+//     'm/d/Y g:i A', 
+//     $date, 
+//     new DateTimeZone('Africa/Cairo')
+// );
+
+// var_dump($dateTime);
+
+/* Note: Comparing DateTime objects can be done using <, >, == and <=> (spaceship operator) */
+
+/* Difference between two dates */
+// $startOf2022 = new DateTime('01-01-2022 5:40:00 AM');
+// $endOf2022 = new DateTime('31-12-2022 4:13:59 PM');
+
+// var_dump($startOf2022->diff($endOf2022));
+// var_dump($startOf2022->diff($endOf2022)->days);
+// echo $startOf2022->diff($endOf2022)->format('%Y years, %m months, %d days, %H hours, %i minutes, %s seconds') . PHP_EOL;
+
+/* Unchangeable DateTime Objects (DateTimeImmutable) */
+/* Note: when changed, it will create a new object with the required changes. */
+// $immutableDateTime = new DateTimeImmutable();
+// var_dump($immutableDateTime);
