@@ -489,3 +489,37 @@ require __DIR__ . DIRECTORY_SEPARATOR . '../vendor/autoload.php';
 /* Note: when changed, it will create a new object with the required changes. */
 // $immutableDateTime = new DateTimeImmutable();
 // var_dump($immutableDateTime);
+
+
+/*******************************************************************/
+
+
+
+/*******************************************************************/
+/*              Lesson 22 - Iterators and Iterable types           */
+/*******************************************************************/
+
+// foreach (['a', 'b', 'c', 'd'] as $key => $value) {
+//     echo "$key: $value" . PHP_EOL;
+// }
+
+// use App\Models\Person;
+// use App\Models\PersonCollection;
+
+// $personCollection = new PersonCollection([
+//     new Person(1),
+//     new Person(2), 
+//     new Person(3)
+// ]);
+
+// /**
+//  * @param iterable $items (array of objects or arrays)
+//  * @return void
+//  */
+// function echoCollectionItems(iterable $items) {
+//     foreach ($items as $person) {
+//         echo "id: $person->id, wage: $person->wage" . PHP_EOL;
+//     }
+// }
+
+// echoCollectionItems($personCollection);
